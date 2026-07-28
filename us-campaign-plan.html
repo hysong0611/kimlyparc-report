@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>킴리팍 미국 Meta 캠페인 세팅안</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f7fb;
+      color: #1f2937;
+    }
+    .card {
+      width: min(420px, calc(100vw - 32px));
+      padding: 28px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, .12);
+    }
+    h1 { margin: 0 0 8px; font-size: 22px; }
+    p { margin: 0 0 22px; color: #6b7280; line-height: 1.5; }
+    label { display: block; margin: 14px 0 6px; font-size: 13px; font-weight: 700; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #111827;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .error { min-height: 20px; margin-top: 12px; color: #dc2626; font-size: 13px; }
+    .hint { margin-top: 14px; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>킴리팍 미국 Meta 캠페인 세팅안</h1>
+    <p>보호된 문서입니다. 아이디와 비밀번호를 입력하면 문서가 열립니다.</p>
+    <form id="login">
+      <label for="username">아이디</label>
+      <input id="username" name="username" autocomplete="username" required>
+      <label for="password">비밀번호</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">문서 열기</button>
+      <div id="error" class="error"></div>
+      <div class="hint">이 파일은 AES-GCM으로 암호화되어 있습니다.</div>
+    </form>
+  </main>
+  <script>
+    const payload = {"salt":"LajXOadUUlDJ9dF1wcEJoA==","nonce":"90Wf6NgeyGQuRNVV","ciphertext":"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","iterations":250000,"usernameSalt":"xoEKmghXRbE3PXOBH9Uytw==","usernameHash":"4dab9ef01d9f218c5613244ea6a9b69a4cb5335efc2749d703c1130ddb6852c8","dlBar":"<div id=\"__dlbar__\" style=\"position:fixed;bottom:24px;right:24px;z-index:2147483647;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif\"><button id=\"__dlbtn__\" style=\"display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:#111827;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3)\" onmouseover=\"this.style.opacity='.8'\" onmouseout=\"this.style.opacity='1'\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/></svg>HTML 다운로드</button></div><script>document.getElementById('__dlbtn__').addEventListener('click',function(){var a=document.createElement('a');a.href=window.__dlUrl__;a.download=window.__dlName__;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);},500);});<\\/script>","dlFilename":"kimlyparc_us_campaign_plan_v1.html"};
+
+    function b64ToBytes(value) {
+      const binary = atob(value);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return bytes;
+    }
+
+    async function sha256Hex(text) {
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function deriveKey(password) {
+      const baseKey = await crypto.subtle.importKey(
+        "raw",
+        new TextEncoder().encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+      );
+      return crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          salt: b64ToBytes(payload.salt),
+          iterations: payload.iterations,
+          hash: "SHA-256"
+        },
+        baseKey,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["decrypt"]
+      );
+    }
+
+    document.getElementById("login").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const error = document.getElementById("error");
+      error.textContent = "";
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      try {
+        const usernameHash = await sha256Hex(username + ":" + payload.usernameSalt);
+        if (usernameHash !== payload.usernameHash) throw new Error("bad username");
+        const key = await deriveKey(password);
+        const compressed = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: b64ToBytes(payload.nonce) },
+          key,
+          b64ToBytes(payload.ciphertext)
+        );
+        const stream = new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream("deflate")));
+        const reportHtml = await stream.text();
+
+        // blob URL을 document.write 전에 window에 보존 (window는 document.write 후에도 유지)
+        window.__dlUrl__ = URL.createObjectURL(new Blob([reportHtml], { type: "text/html;charset=utf-8" }));
+        window.__dlName__ = payload.dlFilename;
+
+        const dlBar = payload.dlBar;
+        const modified = reportHtml.includes('</body>')
+          ? reportHtml.replace('</body>', dlBar + '</body>')
+          : reportHtml + dlBar;
+        document.open();
+        document.write(modified);
+        document.close();
+      } catch (err) {
+        error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
+      }
+    });
+  </script>
+</body>
+</html>
